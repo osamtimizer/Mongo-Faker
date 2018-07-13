@@ -2,7 +2,7 @@ import mongoose from 'mongoose';
 import IUserDocument from './IUserDocument'
 
 const schema = new mongoose.Schema({
-  user: {
+  userName: {
     type: String,
     required: true,
     minlength: 2,
