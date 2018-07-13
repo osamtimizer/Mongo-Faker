@@ -1,5 +1,5 @@
 import mongoose from 'mongoose';
-import IGenerator from './IGenerator';
+import IGenerator from '../interfaces/IGenerator';
 import StringGenerator from './stringGenerator';
 
 class GeneratorProvider {

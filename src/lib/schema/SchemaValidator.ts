@@ -1,5 +1,5 @@
 import mongoose from 'mongoose';
-import IOptions from './IOptions';
+import IOptions from '../interfaces/IOptions';
 
 class SchemaValidator {
   //Type Guards

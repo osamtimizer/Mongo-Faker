@@ -9,9 +9,9 @@
       "request": "launch",
       "name": "Launch Program",
       "preLaunchTask": "compile",
-      "program": "${workspaceFolder}/src/index.ts",
+      "program": "${workspaceFolder}/src/test/test.ts",
       "outFiles": [
-        "${workspaceFolder}/dist/*js"
+        "${workspaceFolder}/dist/**/*js"
       ]
     }
   ]

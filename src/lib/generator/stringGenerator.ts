@@ -1,4 +1,4 @@
-import IGenerator from './IGenerator';
+import IGenerator from '../interfaces/IGenerator';
 import mongoose from 'mongoose';
 
 class StringGenerator implements IGenerator<string>{

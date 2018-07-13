@@ -1,7 +1,7 @@
 import mongoose from 'mongoose';
 import User from './user';
 import IUserDocument from './IUserDocument'
-import FakeGenerator from './faker';
+import FakeGenerator from '../lib/faker/faker';
 
 const generator = new FakeGenerator();
 const faker = generator.getConcreteFaker("mongoose");

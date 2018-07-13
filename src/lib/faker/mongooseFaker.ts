@@ -1,12 +1,12 @@
 import mongoose from 'mongoose';
 
-import SchemaTypeExtend from './schemaTypeExtend';
-import SchemaValidator from './SchemaValidator';
-import GeneratorProvider from './generatorProvider';
+import SchemaTypeExtend from '../schema/schemaTypeExtend';
+import SchemaValidator from '../schema/SchemaValidator';
+import GeneratorProvider from '../generator/generatorProvider';
 
-import IGenerator from './IGenerator';
-import IOptions from './IOptions';
-import IFaker from './IFaker';
+import IGenerator from '../interfaces/IGenerator';
+import IOptions from '../interfaces/IOptions';
+import IFaker from '../interfaces/IFaker';
 
 class MongooseFaker implements IFaker {
   constructor() {
