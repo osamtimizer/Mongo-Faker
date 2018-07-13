@@ -8,4 +8,8 @@ export default class SchemaTypeExtend extends mongoose.SchemaType {
   instance() {
     return this.instance;
   }
+
+  validators() {
+    return this.validators;
+  }
 }
