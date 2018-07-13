@@ -5,3 +5,5 @@ import FakeGenerator from './faker';
 
 const generator = new FakeGenerator();
 const faker = generator.getConcreteFaker("mongoose");
+
+faker.generateRand(User, 100);
