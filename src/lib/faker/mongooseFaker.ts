@@ -34,6 +34,9 @@ class MongooseFaker implements IFaker {
         const num = 0;
       } else if (SchemaValidator.isSchemaNumber(targetSchema)) {
         console.log('Number');
+        const generator = GeneratorProvider.getGenerator("Number", targetSchema);
+        const value = generator.generate();
+        instance.set(targetPath, value);
       } else {
         console.log('invalid schema');
       }

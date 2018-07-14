@@ -7,10 +7,10 @@ import ILengthValidator from '../interfaces/ILengthValidator';
 import ILimitNumberValidator from '../interfaces/ILimitNumberValidator';
 import ValidatorOptions from '../schema/validatorOptions';
 
-class StringGenerator implements IGenerator<string>{
-  private _schema: mongoose.Schema.Types.String;
+class NumberGenerator implements IGenerator<number>{
+  private _schema: mongoose.Schema.Types.Number;
 
-  constructor(schema: mongoose.Schema.Types.String) {
+  constructor(schema: mongoose.Schema.Types.Number) {
     this._schema = schema;
   }
 
@@ -25,41 +25,37 @@ class StringGenerator implements IGenerator<string>{
       if (SchemaValidator.isValidator(element))
         validatorOptions.type = element.type;
 
-      if (validatorOptions.type == "minlength" || validatorOptions.type == "maxlength") {
-        const validator = <ILengthValidator>element;
-        validatorOptions.minlength = validator.minlength;
-        validatorOptions.maxlength = validator.maxlength;
+      if (validatorOptions.type == "min" || validatorOptions.type == "max") {
+        const validator = <ILimitNumberValidator>element;
+        validatorOptions.min = validator.min;
+        validatorOptions.max = validator.max;
 
       } else if (validatorOptions.type == "required") {
         validatorOptions.required = true;
       }
     });
-
-    const _stringGenerator = new _StringGenerator(validatorOptions);
-    const data = _stringGenerator.generate();
-
-    return data || "empty";
+    return 0;
   }
-
 }
 
-class _StringGenerator {
+class _NumberGenerator {
   _validatorOptions: ValidatorOptions;
   constructor(validatorOptions: ValidatorOptions) {
     this._validatorOptions = validatorOptions;
   }
 
-  generate(): string {
-    if (!this._validatorOptions) return "";
+  generate(): number {
+    if (!this._validatorOptions) return null;
 
     //This option allows blank data.
-    if (this._validatorOptions.required && Math.random() > 0.5) return "";
+    if (this._validatorOptions.required && Math.random() > 0.5) return null;
 
-    let data: string;
-    if (this._validatorOptions.minlength || this._validatorOptions.maxlength) {
-      if (this._validatorOptions.minlength) {
+    let data: number;
+    if (this._validatorOptions.min || this._validatorOptions.max) {
+      if (this._validatorOptions.min) {
+
       }
-      if (this._validatorOptions.maxlength) {
+      if (this._validatorOptions.max) {
 
       }
     }
@@ -67,5 +63,3 @@ class _StringGenerator {
     return data;
   }
 }
-
-export default StringGenerator;
