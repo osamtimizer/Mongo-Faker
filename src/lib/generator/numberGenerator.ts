@@ -50,19 +50,10 @@ class _NumberGenerator {
     //This option allows blank data.
     if (this._validatorOptions.required && Math.random() > 0.5) return null;
 
+    //Default Min:-255, Default Max:255
     const minNum = this._validatorOptions.min || -255;
     const maxNum = this._validatorOptions.max || 255;
     const data = Math.round(Math.random() * (maxNum - minNum)) + minNum;
-
-
-    if (this._validatorOptions.min || this._validatorOptions.max) {
-      if (this._validatorOptions.min) {
-
-      }
-      if (this._validatorOptions.max) {
-
-      }
-    }
 
     return data;
   }
