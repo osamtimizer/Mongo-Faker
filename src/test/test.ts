@@ -14,7 +14,7 @@ describe('first test', () => {
   })
 });
 
-describe('User Model', async () => {
+describe('User Model', () => {
   it('should finish successfully', async () => {
     return faker.generateRand(User, 100);
   });
