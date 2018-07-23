@@ -14,7 +14,7 @@ class MongooseFaker implements IFaker {
   }
 
   //Generate fake data which is filling the schema of the model.
-  generateRand<T extends mongoose.Model<mongoose.Document>>
+  async generateRand<T extends mongoose.Model<mongoose.Document>>
     (targetModel: mongoose.Model<mongoose.Document>, times: number) {
 
     let paths = new Array<string>();
@@ -51,8 +51,8 @@ class MongooseFaker implements IFaker {
         if (err) console.error(err);
       });
     }
+    return true;
   }
 }
-
 
 export default MongooseFaker;

@@ -1,5 +1,6 @@
 import IGenerator from '../interfaces/IGenerator';
 import mongoose, { SchemaType } from 'mongoose';
+import faker from 'faker';
 
 import SchemaValidator from '../schema/SchemaValidator';
 import SchemaTypeExtend from '../schema/schemaTypeExtend'
@@ -25,11 +26,12 @@ class StringGenerator implements IGenerator<string>{
       if (SchemaValidator.isValidator(element))
         validatorOptions.type = element.type;
 
-      if (validatorOptions.type == "minlength" || validatorOptions.type == "maxlength") {
+      if (validatorOptions.type == "minlength") {
         const validator = <ILengthValidator>element;
         validatorOptions.minlength = validator.minlength;
+      } else if (validatorOptions.type == "maxlength") {
+        const validator = <ILengthValidator>element;
         validatorOptions.maxlength = validator.maxlength;
-
       } else if (validatorOptions.type == "required") {
         validatorOptions.required = true;
       }
@@ -44,7 +46,10 @@ class StringGenerator implements IGenerator<string>{
 }
 
 class _StringGenerator {
-  _validatorOptions: ValidatorOptions;
+  private readonly _MINNUM = 0;
+  private readonly _MAXNUM = 10;
+
+  private _validatorOptions: ValidatorOptions;
   constructor(validatorOptions: ValidatorOptions) {
     this._validatorOptions = validatorOptions;
   }
@@ -53,18 +58,15 @@ class _StringGenerator {
     if (!this._validatorOptions) return "";
 
     //This option allows blank data.
-    if (this._validatorOptions.required && Math.random() > 0.5) return "";
+    if (!this._validatorOptions.required && Math.random() > 0.5) return "";
 
-    let data: string;
-    if (this._validatorOptions.minlength || this._validatorOptions.maxlength) {
-      if (this._validatorOptions.minlength) {
-      }
-      if (this._validatorOptions.maxlength) {
+    let data = "";
+    const minlength = this._validatorOptions.minlength || this._MINNUM;
+    const maxlength = this._validatorOptions.maxlength || this._MAXNUM;
+    const rand = faker.random.number({ max: maxlength, min: minlength });
+    data = faker.random.alphaNumeric(rand);
 
-      }
-    }
-
-    return data;
+    return data || "";
   }
 }
 

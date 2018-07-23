@@ -1,5 +1,6 @@
 import IGenerator from '../interfaces/IGenerator';
 import mongoose, { SchemaType } from 'mongoose';
+import faker from 'faker';
 
 import SchemaValidator from '../schema/SchemaValidator';
 import SchemaTypeExtend from '../schema/schemaTypeExtend'
@@ -42,7 +43,10 @@ class NumberGenerator implements IGenerator<number>{
 }
 
 class _NumberGenerator {
-  _validatorOptions: ValidatorOptions;
+  private readonly _MAXNUM = 255;
+  private readonly _MINNUM = 0;
+  private _validatorOptions: ValidatorOptions;
+
   constructor(validatorOptions: ValidatorOptions) {
     this._validatorOptions = validatorOptions;
   }
@@ -51,12 +55,12 @@ class _NumberGenerator {
     if (!this._validatorOptions) return null;
 
     //This option allows blank data.
-    if (this._validatorOptions.required && Math.random() > 0.5) return null;
+    if (!this._validatorOptions.required && Math.random() > 0.5) return null;
 
-    //Default Min:-255, Default Max:255
-    const minNum = this._validatorOptions.min || 0;
-    const maxNum = this._validatorOptions.max || 255;
-    const data = Math.round(Math.random() * (maxNum - minNum)) + minNum;
+    const data = faker.random.number({
+      min: this._validatorOptions.min || this._MINNUM,
+      max: this._validatorOptions.max || this._MAXNUM
+    });
 
     return data;
   }
