@@ -4,10 +4,11 @@ class FakerGenerator {
   constructor() {
   }
 
-  getConcreteFaker(target: string) {
+  getConcreteFaker(target: string, storage: string) {
 
+    if (!target || !storage) return null;
     if (target.toLowerCase() == "mongoose") {
-      return new MongooseFaker();
+      return new MongooseFaker(storage);
     }
   }
 }

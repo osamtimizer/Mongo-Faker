@@ -34,7 +34,10 @@ class NumberGenerator implements IGenerator<number>{
         validatorOptions.required = true;
       }
     });
-    return 0;
+
+    const _numberGenerator = new _NumberGenerator(validatorOptions);
+    const data = _numberGenerator.generate();
+    return data || 0;
   }
 }
 
@@ -51,10 +54,12 @@ class _NumberGenerator {
     if (this._validatorOptions.required && Math.random() > 0.5) return null;
 
     //Default Min:-255, Default Max:255
-    const minNum = this._validatorOptions.min || -255;
+    const minNum = this._validatorOptions.min || 0;
     const maxNum = this._validatorOptions.max || 255;
     const data = Math.round(Math.random() * (maxNum - minNum)) + minNum;
 
     return data;
   }
 }
+
+export default NumberGenerator;

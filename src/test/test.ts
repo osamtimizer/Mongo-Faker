@@ -6,7 +6,7 @@ import FakeGenerator from '../lib/faker/faker';
 const expect = chai.expect;
 
 const generator = new FakeGenerator();
-const faker = generator.getConcreteFaker("mongoose");
+const faker = generator.getConcreteFaker("mongoose", "mongodb://localhost:37017/testdb");
 
 //faker.generateRand(User, 100);
 
@@ -14,4 +14,11 @@ describe('first test', () => {
   it('should be passed', () => {
     expect(1).to.equal(1);
   })
+});
+
+describe('User Model', () => {
+  it('should finish successfully', (done) => {
+    faker.generateRand(User, 100);
+    done();
+  });
 });
