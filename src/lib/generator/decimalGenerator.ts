@@ -1,5 +1,6 @@
 import IGenerator from "../interfaces/IGenerator";
 import { Types, Schema } from 'mongoose';
+import faker from 'faker';
 
 class DecimalGenerator implements IGenerator<Types.Decimal128>{
   private _schema: Schema.Types.Decimal128;
@@ -8,7 +9,8 @@ class DecimalGenerator implements IGenerator<Types.Decimal128>{
   }
 
   generate(): Types.Decimal128 {
-    return new Types.Decimal128(new Buffer('', 'utf-8'));
+    const amount = faker.finance.amount();
+    return Types.Decimal128.fromString(amount);
   }
 }
 

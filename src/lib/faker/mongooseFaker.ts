@@ -30,14 +30,16 @@ class MongooseFaker implements IFaker {
         const targetSchema = targetModel.schema.path(targetPath);
 
         //Validation
-        //instance.setはanyを受け入れるので、利用側がgeneratorの型を気にすることはない
+        //GeneratorProvider will handle any types of schema.
         const generator = GeneratorProvider._getGenerator(targetSchema);
         const value = generator.generate();
         instance.set(targetPath, value);
-
       }
       instance.save((err, result) => {
-        if (err) console.error(err);
+        if (err) {
+          console.error(err);
+          return false;
+        }
       });
     }
     return true;

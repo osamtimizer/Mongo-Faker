@@ -40,7 +40,7 @@ class StringGenerator implements IGenerator<string>{
     const _stringGenerator = new _StringGenerator(validatorOptions);
     const data = _stringGenerator.generate();
 
-    return data || "empty";
+    return data;
   }
 
 }
@@ -57,16 +57,18 @@ class _StringGenerator {
   generate(): string {
     if (!this._validatorOptions) return "";
 
+
     //This option allows blank data.
     if (!this._validatorOptions.required && Math.random() > 0.5) return "";
 
     let data = "";
+
     const minlength = this._validatorOptions.minlength || this._MINNUM;
     const maxlength = this._validatorOptions.maxlength || this._MAXNUM;
     const rand = faker.random.number({ max: maxlength, min: minlength });
     data = faker.random.alphaNumeric(rand);
 
-    return data || "";
+    return data;
   }
 }
 

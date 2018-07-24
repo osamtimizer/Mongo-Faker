@@ -3,6 +3,8 @@ import mongoose from 'mongoose';
 import User from './user';
 import IUserDocument from './IUserDocument'
 import FakeGenerator from '../lib/faker/faker';
+import { AsyncResource } from 'async_hooks';
+import BankAccount from './bankAccount';
 const expect = chai.expect;
 
 const generator = new FakeGenerator();
@@ -16,6 +18,12 @@ describe('first test', () => {
 
 describe('User Model', () => {
   it('should finish successfully', async () => {
-    return faker.generateRand(User, 100);
+    return faker.generateRand(User, 10);
   });
+});
+
+describe('BankAccount Model', () => {
+  it('should finish successfully', async () => {
+    return faker.generateRand(BankAccount, 10);
+  })
 });

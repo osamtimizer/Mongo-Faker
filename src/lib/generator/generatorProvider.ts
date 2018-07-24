@@ -18,6 +18,8 @@ class GeneratorProvider {
       return new NumberGenerator(<Schema.Types.Number>type);
     } else if (SchemaValidator.isSchemaString(type)) {
       return new StringGenerator(<Schema.Types.String>type);
+    } else if (SchemaValidator.isSchemaDecimal(type)) {
+      return new DecimalGenerator(<Schema.Types.Decimal128>type);
     }
 
   };
