@@ -30,21 +30,10 @@ class MongooseFaker implements IFaker {
         const targetSchema = targetModel.schema.path(targetPath);
 
         //Validation
-        if (SchemaValidator.isSchemaString(targetSchema)) {
-          console.log('String');
-          const generator = GeneratorProvider.getGenerator("String", targetSchema);
-          const value = generator.generate();
-          instance.set(targetPath, value);
-
-        } else if (SchemaValidator.isSchemaNumber(targetSchema)) {
-          console.log('Number');
-          const generator = GeneratorProvider.getGenerator("Number", targetSchema);
-          const value = generator.generate();
-          instance.set(targetPath, value);
-
-        } else {
-          console.log('invalid schema');
-        }
+        //instance.setはanyを受け入れるので、利用側がgeneratorの型を気にすることはない
+        const generator = GeneratorProvider._getGenerator(targetSchema);
+        const value = generator.generate();
+        instance.set(targetPath, value);
 
       }
       instance.save((err, result) => {

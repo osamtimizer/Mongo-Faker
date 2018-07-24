@@ -1,4 +1,5 @@
 import mongoose from 'mongoose';
+import { Schema } from 'mongoose';
 import IUserDocument from './IUserDocument'
 
 const schema = new mongoose.Schema({
@@ -14,7 +15,30 @@ const schema = new mongoose.Schema({
     min: 0,
     max: 255
   }
+  /*
+  ,
+  birthday: {
+    type: Date,
+    required: true
+  },
+  hobbies: {
+    type: Array,
+    of: String
+  },
+  bank: {
+    type: Schema.Types.Decimal128,
+    required: true
+  },
+  internalData: {
+    type: Buffer
+  },
+  others: {
+    type: Schema.Types.Mixed
+  }
+  */
+
 });
+
 
 const User = mongoose.model<IUserDocument>('User', schema);
 

@@ -1,5 +1,6 @@
 import mongoose from 'mongoose';
 import { Schema } from 'mongoose';
+import SchemaValidator from '../schema/SchemaValidator';
 
 import IGenerator from '../interfaces/IGenerator';
 import StringGenerator from './stringGenerator';
@@ -12,6 +13,15 @@ import ObjectIdGenerator from './objectIdGenerator';
 import MapGenerator from './mapGenerator';
 
 class GeneratorProvider {
+  static _getGenerator(type: mongoose.SchemaType) {
+    if (SchemaValidator.isSchemaNumber(type)) {
+      return new NumberGenerator(<Schema.Types.Number>type);
+    } else if (SchemaValidator.isSchemaString(type)) {
+      return new StringGenerator(<Schema.Types.String>type);
+    }
+
+  };
+
   static getGenerator(target: string, type: mongoose.SchemaType) {
     if (target == "Buffer") return new BufferGenerator(<Schema.Types.Buffer>type);
     if (target == "Decimal128") return new DecimalGenerator(<Schema.Types.Decimal128>type);

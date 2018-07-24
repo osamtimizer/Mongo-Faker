@@ -11,15 +11,15 @@ import ValidatorOptions from '../schema/validatorOptions';
 import StringGenerator from './stringGenerator';
 
 
-class ArrayGenerator implements IArrayGenerator<any>{
+class ArrayGenerator<T> implements IArrayGenerator<T>{
   private _schema: mongoose.Schema.Types.Array;
 
   constructor(schema: mongoose.Schema.Types.Array) {
     this._schema = schema;
   }
 
-  generate(): Array<any> {
-    return new Array<any>();
+  generate(): Array<T> {
+    return new Array<T>();
   }
 }
 

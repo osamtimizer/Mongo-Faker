@@ -1,5 +1,5 @@
 import IGenerator from '../interfaces/IGenerator';
-import mongoose, { SchemaType } from 'mongoose';
+import { Schema, SchemaType } from 'mongoose';
 import faker from 'faker';
 
 import SchemaValidator from '../schema/SchemaValidator';
@@ -9,9 +9,9 @@ import ILimitNumberValidator from '../interfaces/ILimitNumberValidator';
 import ValidatorOptions from '../schema/validatorOptions';
 
 class NumberGenerator implements IGenerator<number>{
-  private _schema: mongoose.Schema.Types.Number;
+  private _schema: Schema.Types.Number;
 
-  constructor(schema: mongoose.Schema.Types.Number) {
+  constructor(schema: Schema.Types.Number) {
     this._schema = schema;
   }
 
