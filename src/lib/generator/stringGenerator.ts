@@ -1,17 +1,14 @@
-import IGenerator from '../interfaces/IGenerator';
-import mongoose, { SchemaType } from 'mongoose';
+import { Schema } from 'mongoose';
 import faker from 'faker';
 
+import IGenerator from '../interfaces/IGenerator';
 import SchemaValidator from '../schema/SchemaValidator';
-import SchemaTypeExtend from '../schema/schemaTypeExtend'
-import ILengthValidator from '../interfaces/ILengthValidator';
-import ILimitNumberValidator from '../interfaces/ILimitNumberValidator';
 import ValidatorOptions from '../schema/validatorOptions';
 
 class StringGenerator implements IGenerator<string>{
-  private _schema: mongoose.Schema.Types.String;
+  private _schema: Schema.Types.String;
 
-  constructor(schema: mongoose.Schema.Types.String) {
+  constructor(schema: Schema.Types.String) {
     this._schema = schema;
   }
 
@@ -31,7 +28,7 @@ class StringGenerator implements IGenerator<string>{
 
 class _StringGenerator {
   private readonly _MINNUM;
-  private readonly _MAXNUM = 10;
+  private readonly _MAXNUM;
 
   private _validatorOptions: ValidatorOptions;
   constructor(validatorOptions: ValidatorOptions) {
@@ -44,21 +41,22 @@ class _StringGenerator {
       this._MINNUM = 0;
     }
 
+    if (this._validatorOptions.maxlength) {
+      this._MAXNUM = this._validatorOptions.maxlength;
+    } else {
+      this._MAXNUM = 10;
+    }
+
   }
 
   generate(): string {
     if (!this._validatorOptions) return "";
 
-
     //This option allows blank data.
     if (!this._validatorOptions.required && Math.random() > 0.5) return "";
 
-    let data = "";
-
-    const minlength = this._validatorOptions.minlength || this._MINNUM;
-    const maxlength = this._validatorOptions.maxlength || this._MAXNUM;
-    const rand = faker.random.number({ max: maxlength, min: minlength });
-    data = faker.random.alphaNumeric(rand);
+    const rand = faker.random.number({ max: this._MAXNUM, min: this._MINNUM });
+    const data = faker.random.alphaNumeric(rand);
 
     return data;
   }

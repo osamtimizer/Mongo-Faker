@@ -1,11 +1,8 @@
-import IGenerator from '../interfaces/IGenerator';
-import { Schema, SchemaType } from 'mongoose';
+import { Schema } from 'mongoose';
 import faker from 'faker';
 
+import IGenerator from '../interfaces/IGenerator';
 import SchemaValidator from '../schema/SchemaValidator';
-import SchemaTypeExtend from '../schema/schemaTypeExtend'
-import ILengthValidator from '../interfaces/ILengthValidator';
-import ILimitNumberValidator from '../interfaces/ILimitNumberValidator';
 import ValidatorOptions from '../schema/validatorOptions';
 
 class NumberGenerator implements IGenerator<number>{
