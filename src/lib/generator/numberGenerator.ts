@@ -16,25 +16,10 @@ class NumberGenerator implements IGenerator<number>{
   }
 
   generate() {
-    let validators;
+    let validatorOptions: ValidatorOptions;
     if (SchemaValidator.isSchemaTypeExtend(this._schema)) {
-      validators = this._schema.validators;
+      validatorOptions = new ValidatorOptions(this._schema);
     }
-
-    let validatorOptions = new ValidatorOptions();
-    validators.forEach(element => {
-      if (SchemaValidator.isValidator(element))
-        validatorOptions.type = element.type;
-
-      if (validatorOptions.type == "min" || validatorOptions.type == "max") {
-        const validator = <ILimitNumberValidator>element;
-        validatorOptions.min = validator.min;
-        validatorOptions.max = validator.max;
-
-      } else if (validatorOptions.type == "required") {
-        validatorOptions.required = true;
-      }
-    });
 
     const _numberGenerator = new _NumberGenerator(validatorOptions);
     const data = _numberGenerator.generate();

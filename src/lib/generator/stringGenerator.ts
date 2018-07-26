@@ -16,26 +16,10 @@ class StringGenerator implements IGenerator<string>{
   }
 
   generate() {
-    let validators;
+    let validatorOptions: ValidatorOptions;
     if (SchemaValidator.isSchemaTypeExtend(this._schema)) {
-      validators = this._schema.validators;
+      validatorOptions = new ValidatorOptions(this._schema);
     }
-
-    let validatorOptions = new ValidatorOptions();
-    validators.forEach(element => {
-      if (SchemaValidator.isValidator(element))
-        validatorOptions.type = element.type;
-
-      if (validatorOptions.type == "minlength") {
-        const validator = <ILengthValidator>element;
-        validatorOptions.minlength = validator.minlength;
-      } else if (validatorOptions.type == "maxlength") {
-        const validator = <ILengthValidator>element;
-        validatorOptions.maxlength = validator.maxlength;
-      } else if (validatorOptions.type == "required") {
-        validatorOptions.required = true;
-      }
-    });
 
     const _stringGenerator = new _StringGenerator(validatorOptions);
     const data = _stringGenerator.generate();
@@ -46,12 +30,20 @@ class StringGenerator implements IGenerator<string>{
 }
 
 class _StringGenerator {
-  private readonly _MINNUM = 0;
+  private readonly _MINNUM;
   private readonly _MAXNUM = 10;
 
   private _validatorOptions: ValidatorOptions;
   constructor(validatorOptions: ValidatorOptions) {
     this._validatorOptions = validatorOptions;
+    if (this._validatorOptions.minlength) {
+      this._MINNUM = this._validatorOptions.minlength;
+    } else if (this._validatorOptions.required) {
+      this._MINNUM = 1;
+    } else {
+      this._MINNUM = 0;
+    }
+
   }
 
   generate(): string {
