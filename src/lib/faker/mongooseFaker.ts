@@ -24,7 +24,10 @@ class MongooseFaker implements IFaker {
 
     for (let i = 0; i < times; i++) {
       const instance = new targetModel();
+
       for (let targetPath of paths) {
+
+        //These items are not related to schema itself.
         if (targetPath == '_id' || targetPath == '__v') continue;
 
         const targetSchema = targetModel.schema.path(targetPath);

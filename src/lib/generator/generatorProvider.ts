@@ -20,6 +20,8 @@ class GeneratorProvider {
       return new StringGenerator(<Schema.Types.String>type);
     } else if (SchemaValidator.isSchemaDecimal(type)) {
       return new DecimalGenerator(<Schema.Types.Decimal128>type);
+    } else if (SchemaValidator.isSchemaBuffer(type)) {
+      return new BufferGenerator(<Schema.Types.Buffer>type);
     }
 
   };
