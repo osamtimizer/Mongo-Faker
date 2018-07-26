@@ -1,10 +1,10 @@
 import chai from 'chai';
 import mongoose from 'mongoose';
-import User from './user';
-import IUserDocument from './IUserDocument'
+import User from './models/user';
+import IUserDocument from './interfaces/IUserDocument'
 import FakeGenerator from '../lib/faker/faker';
 import { AsyncResource } from 'async_hooks';
-import BankAccount from './bankAccount';
+import BankAccount from './models/bankAccount';
 const expect = chai.expect;
 
 const generator = new FakeGenerator();

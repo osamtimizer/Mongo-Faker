@@ -1,5 +1,5 @@
 import mongoose from 'mongoose';
-import IBankAccountDocument from './IBankAccountDocument';
+import IBankAccountDocument from '../interfaces/IBankAccountDocument';
 
 const schema = new mongoose.Schema({
   holder: {

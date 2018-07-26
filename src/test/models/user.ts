@@ -1,6 +1,6 @@
 import mongoose from 'mongoose';
 import { Schema } from 'mongoose';
-import IUserDocument from './IUserDocument'
+import IUserDocument from '../interfaces/IUserDocument'
 
 const schema = new mongoose.Schema({
   userName: {

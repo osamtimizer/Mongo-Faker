@@ -1,6 +1,6 @@
 import mongoose from 'mongoose';
-import User from './user';
-import BankAccount from './bankAccount';
+import User from './models/user';
+import BankAccount from './models/bankAccount';
 import FakeGenerator from '../lib/faker/faker';
 
 const generator = new FakeGenerator();

@@ -8,7 +8,9 @@ class BufferGenerator implements IGenerator<Buffer>{
     this._schema = schema;
   }
   generate(): Buffer {
-    return new Buffer('', 'utf-8');
+    const result = new Buffer(0);
+    result.fill(0);
+    return result;
   }
 }
 
