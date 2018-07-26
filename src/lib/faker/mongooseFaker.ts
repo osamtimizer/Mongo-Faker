@@ -10,7 +10,7 @@ import IFaker from '../interfaces/IFaker';
 
 class MongooseFaker implements IFaker {
   constructor(url: string) {
-    mongoose.connect(url);
+    mongoose.connect(url, { useNewUrlParser: true });
   }
 
   //Generate fake data which is filling the schema of the model.
